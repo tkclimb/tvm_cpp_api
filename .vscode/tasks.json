@@ -1,0 +1,80 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "cmake.init",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "*"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake.new",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "dependsOn": "cmake.init",
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake.clean",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake.build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j4"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake.clean_build",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "-j4"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "dependsOn": "cmake.clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "cmake.run",
+            "type": "shell",
+            "command": "./test",
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "dependsOn": "cmake.build",
+            "problemMatcher": []
+        }
+    ]
+}
